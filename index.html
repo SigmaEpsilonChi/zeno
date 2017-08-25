@@ -13,7 +13,9 @@
         <script src="./Web/Build/UnityLoader.js"></script>
 
         <script>
-          var gameInstance = UnityLoader.instantiate("gameContainer", "./Web/Build/Web.json", {onProgress: UnityProgress});
+            var gameInstance = UnityLoader.instantiate("gameContainer", "./Web/Build/Web.json", {onProgress: UnityProgress});
+            // I really wish UnityLoader would stop modifying the style attributes of this container.
+            document.getElementById("gameContainer").style.margin = "auto";
         </script>
     </head>
     <body>
@@ -26,9 +28,8 @@
 
         <div class="game">
             <h2>ZENO</h2>
-            
-            <div class="game">
-            <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
+
+            <div id="gameContainer" style="width: 960px; height: 600px;"></div>
             <!-- <div class="webgl-content"> -->
               <!-- <div class="footer"> -->
                 <!-- <div class="webgl-logo"></div> -->
@@ -36,7 +37,6 @@
                 <!-- <div class="title">Zen0</div> -->
               <!-- </div> -->
             <!-- </div> -->
-            </div>
         </div>
 
         <div id="footer-container"></div>
