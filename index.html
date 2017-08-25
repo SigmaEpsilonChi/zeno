@@ -11,12 +11,6 @@
         <link rel="stylesheet" href="./Web/TemplateData/style.css">
         <script src="./Web/TemplateData/UnityProgress.js"></script>  
         <script src="./Web/Build/UnityLoader.js"></script>
-
-        <script>
-            var gameInstance = UnityLoader.instantiate("gameContainer", "./Web/Build/Web.json", {onProgress: UnityProgress});
-            // I really wish UnityLoader would stop modifying the style attributes of this container.
-            document.getElementById("gameContainer").style.margin = "auto";
-        </script>
     </head>
     <body>
         <div id="nav-container"></div>
@@ -38,6 +32,12 @@
               <!-- </div> -->
             <!-- </div> -->
         </div>
+
+        <script>
+            var gameInstance = UnityLoader.instantiate("gameContainer", "./Web/Build/Web.json", {onProgress: UnityProgress});
+            // I really wish UnityLoader would stop modifying the style attributes of this container.
+            document.getElementById("gameContainer").style.margin = "auto";
+        </script>
 
         <div id="footer-container"></div>
         <script type="text/javascript">
