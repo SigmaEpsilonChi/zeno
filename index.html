@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<style>
+</style>
+<html>
+    <head>
+        <title>Complexify</title>
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <link rel="icon" type="image/png" href="/favicon.png"/>
+
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="./Web/TemplateData/style.css">
+        <script src="./Web/TemplateData/UnityProgress.js"></script>  
+        <script src="./Web/Build/UnityLoader.js"></script>
+
+        <script>
+          var gameInstance = UnityLoader.instantiate("gameContainer", "./Web/Build/Web.json", {onProgress: UnityProgress});
+        </script>
+    </head>
+    <body>
+        <div id="nav-container"></div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+        $('#nav-container').load('/nav.html');
+        });
+        </script>
+
+        <h2>ZEN 0</h2>
+
+        <div class="webgl-content">
+          <div id="gameContainer" style="width: 960px; height: 600px"></div>
+          <div class="footer">
+            <!-- <div class="webgl-logo"></div> -->
+            <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+            <!-- <div class="title">Zen0</div> -->
+          </div>
+        </div>
+
+        <div id="footer-container"></div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+        $('#footer-container').load('/footer.html');
+        });
+        </script>
+    </body>
+</html>
