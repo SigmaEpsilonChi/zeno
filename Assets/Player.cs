@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Please don't look at this ugly mess, it was written for a 24 hour game jam.
+
 public class Player : MonoBehaviour {
 	public float gameProgress;
 	public Vector2 gameRange;
@@ -31,11 +33,14 @@ public class Player : MonoBehaviour {
 	private TheLight theLight;
 	private AudioSource audio;
 
-	private bool useCursor = true;
+	private bool useCursor = false;
 
 	void Start () {
 		theLight = FindObjectOfType<TheLight>();
 		audio = GetComponent<AudioSource>();
+
+		transform.rotation = Quaternion.Euler(0, cameraX, 0);
+		camera.transform.localRotation = Quaternion.Euler(-cameraY, 0, 0);
 	}
 	
 	void Update () {
@@ -54,28 +59,33 @@ public class Player : MonoBehaviour {
 		moveVector = moveVector*(1-moveProgress);
 		transform.position = transform.position+moveVector;
 
-		if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
+		//if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
 		//if (Input.GetKeyDown(KeyCode.Escape)) useCursor = !useCursor;
 		//if (Input.GetMouseButtonDown(0)) useCursor = true;
 
 		//float cursorProgress = Mathf.SmoothStep(0, 1, Mathf.Clamp01(Time.time/8));
 		float cursorProgress = Mathf.Clamp01(1-1/(Time.time*0.2f+1));
 
-		if (useCursor) {
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+		if (CursorInWindow()) {
+			if (Input.GetMouseButtonDown(0)) {
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
+				useCursor = true;
+			}
+			if (useCursor) {
+				cameraX += Input.GetAxis("Mouse X")*cameraSpeed.x*cursorProgress;
+				cameraY += Input.GetAxis("Mouse Y")*cameraSpeed.y*cursorProgress;
+				cameraY = Mathf.Clamp(cameraY, -80, 89);
 
-			cameraX += Input.GetAxis("Mouse X")*cameraSpeed.x*cursorProgress;
-			cameraY += Input.GetAxis("Mouse Y")*cameraSpeed.y*cursorProgress;
-			cameraY = Mathf.Clamp(cameraY, -80, 89);
-
-			transform.rotation = Quaternion.Euler(0, cameraX, 0);
-			camera.transform.localRotation = Quaternion.Euler(-cameraY, 0, 0);
-		}
-		else {
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
-
+				transform.rotation = Quaternion.Euler(0, cameraX, 0);
+				camera.transform.localRotation = Quaternion.Euler(-cameraY, 0, 0);
+			}
+			/*
+			else {
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
+			*/
 		}
 
 		footstepProgress = Mathf.InverseLerp(footstepProgressRange.x, footstepProgressRange.y, gameProgress);
@@ -86,5 +96,12 @@ public class Player : MonoBehaviour {
 			audio.PlayOneShot(footstepSound);
 			footstepDistance = 0;
 		}
+	}
+
+	bool CursorInWindow () {
+		Vector2 v = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+		if (v.x >= 1 || v.x <= 0) return false;
+		if (v.y >= 1 || v.y <= 0) return false;
+		return true;
 	}
 }
