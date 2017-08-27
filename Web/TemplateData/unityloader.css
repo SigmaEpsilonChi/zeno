@@ -1,0 +1,18 @@
+.game * {border: 0; margin: 0; padding: 0}
+.game {position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);}
+
+.game .logo, .progress {position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);}
+.game .logo {background: url('/unityloader/progressLogo.Light.png') no-repeat center / contain; width: 154px; height: 130px;}
+.game .progress {height: 18px; width: 141px; margin-top: 90px;}
+.game .progress .empty {background: url('/unityloader/progressEmpty.Light.png') no-repeat right / cover; float: right; width: 100%; height: 100%; display: inline-block;}
+.game .progress .full {background: url('/unityloader/progressFull.Light.png') no-repeat left / cover; float: left; width: 0%; height: 100%; display: inline-block;}
+
+.game .logo.Dark {background-image: url('/unityloader/progressLogo.Dark.png');}
+.game .progress.Dark .empty {background-image: url('/unityloader/progressEmpty.Dark.png');}
+.game .progress.Dark .full {background-image: url('/unityloader/progressFull.Dark.png');}
+
+.game .footer {margin-top: 5px; height: 38px; line-height: 38px; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: 18px;} 
+.game .footer .webgl-logo, .title, .fullscreen {height: 100%; display: inline-block; background: transparent center no-repeat;} 
+.game .footer .webgl-logo {background-image: url('/unityloader/webgl-logo.png'); width: 204px; float: left;}
+.game .footer .title {margin-right: 10px; float: right;}
+.game .footer .fullscreen {background-image: url('/unityloader/fullscreen.png'); width: 38px; float: right;}

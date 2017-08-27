@@ -44,6 +44,10 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (CursorInWindow() && Input.GetMouseButtonDown(0)) {
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
+		}
 
 		//gameProgress = 1/(Mathf.Pow(transform.position.magnitude*progressScale, progressPower)+1);
 		gameProgress = Mathf.Clamp01(Mathf.InverseLerp(gameRange.y, gameRange.x, transform.position.magnitude));
